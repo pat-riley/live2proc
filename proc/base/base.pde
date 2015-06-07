@@ -20,14 +20,14 @@ void setup() {
 
   r1 = new HEllipse(100);
   c1 = new HCanvas().autoClear(false).fade(0);
-  
+
 
   HRotate hr1 = new HRotate();
   hr1.target(r1).speed(2);
 }
 
 void draw() {
-  
+
     H.drawStage();
 
   H.add(c1);
