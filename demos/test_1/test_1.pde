@@ -19,7 +19,7 @@ void setup() {
   smooth();
 
   r1 = new HEllipse(100);
-  c1 = new HCanvas().autoClear(false).fade(5);
+  c1 = new HCanvas().autoClear(false).fade(0);
 	
 
 	HRotate hr1 = new HRotate();
