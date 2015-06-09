@@ -6,17 +6,19 @@ OscP5 oscP5;
 NetAddress myRemoteLocation;
 ControlP5 cp5;
 
-float value;
-float zalue;
 
+
+// GLOBAL VARIABLES
 int frameRate = 100;
 
-
-
+//AUDIO VARIABLES
+float volumeOneLeft;
+float volumeOneRight;
+int pitchOne;
 
 
 void setup() {
-  size(500,500);
+  size(1000,500);
   frameRate(frameRate);
   smooth();
   
@@ -38,14 +40,18 @@ void draw() {
   background(50,50,50);  
   
   // var X
-  text("var X", 10, 30);
-  text(value, 50, 30);
-  rect(100, 20, value, 10);
+  text(volumeOneLeft, 50, 30);
+  text("Track 01 L",  100, 30);
+  rect(200, 20, volumeOneLeft, 10);
   
   // var Y
-  text("var Y", 10, 45);
-  text(zalue, 50, 45);
-  rect(100, 30, zalue, 10);
+  text(volumeOneRight, 50, 45);
+  text("Track 01 R", 100, 45);
+  rect(200, 30, volumeOneRight, 10);
+  
+  //  Midi Pitch 1
+  text(pitchOne, 50, 60);
+  text("pitchOne", 100, 60);
   
 
    // HUD
@@ -57,11 +63,19 @@ void draw() {
 void oscEvent(OscMessage theOscMessage) {
 
   if (theOscMessage.checkAddrPattern("/varX") ==true){
-    value = theOscMessage.get(0).floatValue();
+    volumeOneLeft = theOscMessage.get(0).floatValue();
+    //println(theOscMessage);
+    //println(volumeOneLeft);
   }
   
   if (theOscMessage.checkAddrPattern("/varY") ==true){
-    zalue = theOscMessage.get(0).floatValue();
+    volumeOneRight = theOscMessage.get(0).floatValue();
   }
+  
+    if (theOscMessage.checkAddrPattern("/pitch") ==true){
+    pitchOne = theOscMessage.get(0).intValue();
+    println(pitchOne);
+  }
+
 
 }
