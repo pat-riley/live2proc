@@ -14,11 +14,12 @@ int frameRate = 100;
 //AUDIO VARIABLES
 float volumeOneLeft;
 float volumeOneRight;
-int pitchOne;
+int   pitchOne;
+int   velocityOne;
 
 
 void setup() {
-  size(1000,500);
+  size(800,500);
   frameRate(frameRate);
   smooth();
   
@@ -53,6 +54,10 @@ void draw() {
   text(pitchOne, 50, 60);
   text("pitchOne", 100, 60);
   
+  //  Midi Velocity 1
+  text(velocityOne, 50, 76);
+  text("velocityOne", 100, 75);
+  rect(200, 65, velocityOne, 10);
 
    // HUD
    text("frameRate", 10, 450);
@@ -72,9 +77,14 @@ void oscEvent(OscMessage theOscMessage) {
     volumeOneRight = theOscMessage.get(0).floatValue();
   }
   
-    if (theOscMessage.checkAddrPattern("/pitch") ==true){
+  if (theOscMessage.checkAddrPattern("/pitch") ==true){
     pitchOne = theOscMessage.get(0).intValue();
     println(pitchOne);
+  }
+  
+  if (theOscMessage.checkAddrPattern("/velocity") ==true){
+    velocityOne = theOscMessage.get(0).intValue();
+    println(velocityOne);
   }
 
 
